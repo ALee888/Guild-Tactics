@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://cpnirrte2a3uk"]
+
+[ext_resource type="Script" path="res://scripts/unit/unit.gd" id="1_xtivw"]
+[ext_resource type="Texture2D" uid="uid://bwts408fu28mn" path="res://assets/units/Ranger1.0.png" id="2_2o44t"]
+[ext_resource type="PackedScene" uid="uid://3733uyy7l7i" path="res://scenes/unit/Components/highlighter.tscn" id="3_yp33j"]
+[ext_resource type="PackedScene" uid="uid://brcg7wqajk0y6" path="res://scenes/unit/Components/unit_ui.tscn" id="4_ej1ul"]
+[ext_resource type="PackedScene" uid="uid://yknw38o0ohb6" path="res://scenes/unit/Components/grid_movement.tscn" id="6_b5l8a"]
+[ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="7_apurj"]
+[ext_resource type="PackedScene" uid="uid://cydyqvd8kjtp" path="res://scenes/unit/Components/player_controller.tscn" id="8_7ip1h"]
+[ext_resource type="PackedScene" uid="uid://b2615xel6s45s" path="res://scenes/unit/Components/unit_collision_shape.tscn" id="8_u7c3t"]
+[ext_resource type="PackedScene" uid="uid://dm3ge05odprfs" path="res://scenes/unit/Components/combat_component.tscn" id="9_iuhxo"]
+[ext_resource type="Script" path="res://scripts/equipment/weapon.gd" id="10_7k71k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfhum"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
+input_pickable = true
+motion_mode = 1
+script = ExtResource("1_xtivw")
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [-8.0, 8.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(8, 8)
+texture = ExtResource("2_2o44t")
+region_rect = Rect2(160, 192, 705, 768)
+
+[node name="HealthBar" type="ProgressBar" parent="Sprite2D"]
+offset_left = -8.0
+offset_top = -13.0
+offset_right = 8.0
+offset_bottom = -9.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_dfhum")
+max_value = 5.0
+step = 1.0
+value = 5.0
+show_percentage = false
+
+[node name="Highlighter" parent="Sprite2D" instance=ExtResource("3_yp33j")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 0)
+
+[node name="UnitUI" parent="." instance=ExtResource("4_ej1ul")]
+
+[node name="GridMovement" parent="." instance=ExtResource("6_b5l8a")]
+
+[node name="Stats" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("7_apurj")]
+health_bar = NodePath("../Sprite2D/HealthBar")
+
+[node name="PlayerController" parent="." instance=ExtResource("8_7ip1h")]
+
+[node name="UnitCollisionShape" parent="." instance=ExtResource("8_u7c3t")]
+
+[node name="CombatComponent" parent="." node_paths=PackedStringArray("weapon") instance=ExtResource("9_iuhxo")]
+weapon = NodePath("../Bow")
+
+[node name="Bow" type="Node" parent="."]
+script = ExtResource("10_7k71k")
+damage = 3
+range = 5
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

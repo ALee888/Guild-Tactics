@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://f4n43s7wbyxh"]
+
+[ext_resource type="Script" path="res://scripts/items/equipment/weapon.gd" id="1_vgc5v"]
+
+[node name="Claws" type="Node"]
+script = ExtResource("1_vgc5v")
+damage = 1
+range = 1

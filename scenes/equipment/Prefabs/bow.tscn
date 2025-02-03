@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bujj6lvmg51bg"]
+
+[ext_resource type="Script" path="res://scripts/items/equipment/weapon.gd" id="1_scmbv"]
+
+[node name="Weapon" type="Node"]
+script = ExtResource("1_scmbv")
+damage = 1
+range = 5

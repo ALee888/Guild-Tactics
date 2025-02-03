@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkluhleqjf0co"]
+
+[ext_resource type="Script" path="res://scripts/unit/unit.gd" id="1_mk4yb"]
+[ext_resource type="PackedScene" uid="uid://c3nkk1d2atvg0" path="res://scenes/unit/Components/unit_sprite.tscn" id="2_yynbu"]
+[ext_resource type="PackedScene" uid="uid://b2615xel6s45s" path="res://scenes/unit/Components/unit_collision_shape.tscn" id="3_myxix"]
+[ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="4_lv5xv"]
+[ext_resource type="PackedScene" uid="uid://dpsoty2c27o2p" path="res://scenes/unit/Components/inventory.tscn" id="5_ewj0o"]
+[ext_resource type="Script" path="res://scripts/unit/Components/skills.gd" id="6_mi00o"]
+[ext_resource type="Script" path="res://scripts/unit/Skills/weapon_attack.gd" id="7_fe8tt"]
+
+[node name="Ranger" type="CharacterBody2D"]
+input_pickable = true
+motion_mode = 1
+script = ExtResource("1_mk4yb")
+unit_type = 3
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [-8.0, 8.0]
+
+[node name="UnitSprite" parent="." instance=ExtResource("2_yynbu")]
+
+[node name="UnitCollisionShape" parent="." instance=ExtResource("3_myxix")]
+
+[node name="Stats" parent="." instance=ExtResource("4_lv5xv")]
+
+[node name="Inventory" parent="." instance=ExtResource("5_ewj0o")]
+
+[node name="Skills" type="Node" parent="."]
+script = ExtResource("6_mi00o")
+
+[node name="WeaponAttack" type="Node" parent="Skills"]
+script = ExtResource("7_fe8tt")
+target = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

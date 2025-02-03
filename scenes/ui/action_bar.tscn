@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://doa24rmwutcm2"]
+
+[ext_resource type="Script" path="res://scripts/ui/action_bar.gd" id="1_bfnfx"]
+[ext_resource type="Texture2D" uid="uid://bt4jbvqowe6ag" path="res://assets/ui/Sword action hotbar.png" id="1_f0x4k"]
+
+[node name="ActionBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_bfnfx")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -31.0
+offset_right = 97.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="Panel/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Confirm"
+
+[node name="BasicActions" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="WeaponAttack" type="Button" parent="Panel/VBoxContainer/BasicActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Action"
+icon = ExtResource("1_f0x4k")
+
+[node name="DefendButton" type="Button" parent="Panel/VBoxContainer/BasicActions"]
+layout_mode = 2
+text = "Defend"
+
+[node name="PassButton" type="Button" parent="Panel/VBoxContainer/BasicActions"]
+layout_mode = 2
+text = "Pass"
+
+[node name="SkillsBar" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Skill1" type="Button" parent="Panel/VBoxContainer/SkillsBar"]
+layout_mode = 2
+text = "1"
+
+[node name="Skill2" type="Button" parent="Panel/VBoxContainer/SkillsBar"]
+layout_mode = 2
+text = "2"
+
+[node name="Skill3" type="Button" parent="Panel/VBoxContainer/SkillsBar"]
+layout_mode = 2
+text = "3"
+
+[node name="Skill4" type="Button" parent="Panel/VBoxContainer/SkillsBar"]
+layout_mode = 2
+text = "4"
+
+[connection signal="pressed" from="Panel/VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BasicActions/WeaponAttack" to="." method="_on_weapon_attack_pressed"]

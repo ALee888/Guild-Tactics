@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm3ge05odprfs"]
+
+[ext_resource type="Script" path="res://scripts/unit/Components/combat.gd" id="1_ybcs2"]
+[ext_resource type="PackedScene" uid="uid://binsv0nsf4ujx" path="res://scenes/gameplay/pathing.tscn" id="2_n8goi"]
+
+[node name="CombatComponent" type="Node2D"]
+script = ExtResource("1_ybcs2")
+
+[node name="Pathing" parent="." instance=ExtResource("2_n8goi")]

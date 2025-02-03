@@ -1,0 +1,313 @@
+[gd_scene load_steps=18 format=4 uid="uid://ccur6dimsf7qf"]
+
+[ext_resource type="Script" path="res://scripts/globals/game.gd" id="1_jyrdu"]
+[ext_resource type="Texture2D" uid="uid://43ee1l7cuxw8" path="res://assets/level/desert.png" id="2_rm5io"]
+[ext_resource type="Script" path="res://scenes/gameplay/unit_handler.gd" id="3_1fnir"]
+[ext_resource type="Script" path="res://scripts/globals/player_handler.gd" id="3_1ty2c"]
+[ext_resource type="PackedScene" uid="uid://dread1ggp1q3p" path="res://scenes/unit/Prefabs/ranger.tscn" id="4_qvp3i"]
+[ext_resource type="PackedScene" uid="uid://bvurcbfh1iejo" path="res://scenes/unit/Prefabs/shade.tscn" id="6_1qanx"]
+[ext_resource type="Script" path="res://scripts/ui/grid.gd" id="6_5s6n2"]
+[ext_resource type="FontFile" uid="uid://me1ulrureku8" path="res://SEVESBRG.TTF" id="7_tvuoa"]
+[ext_resource type="PackedScene" uid="uid://cm2s4wxs5pgqy" path="res://scenes/ui/marker.tscn" id="8_pfu7e"]
+[ext_resource type="Script" path="res://scripts/globals/combat_handler.gd" id="9_voa7f"]
+[ext_resource type="PackedScene" uid="uid://binsv0nsf4ujx" path="res://scenes/gameplay/pathing.tscn" id="10_nkk0r"]
+[ext_resource type="Script" path="res://selection_handler.gd" id="11_4hyqs"]
+[ext_resource type="Script" path="res://scripts/globals/movement_handler.gd" id="12_taqrg"]
+[ext_resource type="Script" path="res://scripts/enemy_handler.gd" id="13_s10t3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21u1r"]
+texture = ExtResource("2_rm5io")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+0:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+7:11/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+11:15/0 = 0
+12:15/0 = 0
+0:16/0 = 0
+6:16/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+11:16/0 = 0
+12:16/0 = 0
+0:17/0 = 0
+1:17/0 = 0
+5:17/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+9:17/0 = 0
+10:17/0 = 0
+11:17/0 = 0
+12:17/0 = 0
+0:18/0 = 0
+1:18/0 = 0
+2:18/0 = 0
+4:18/0 = 0
+5:18/0 = 0
+6:18/0 = 0
+7:18/0 = 0
+8:18/0 = 0
+9:18/0 = 0
+10:18/0 = 0
+11:18/0 = 0
+12:18/0 = 0
+0:19/0 = 0
+1:19/0 = 0
+2:19/0 = 0
+3:19/0 = 0
+4:19/0 = 0
+5:19/0 = 0
+6:19/0 = 0
+7:19/0 = 0
+8:19/0 = 0
+9:19/0 = 0
+10:19/0 = 0
+11:19/0 = 0
+0:20/0 = 0
+1:20/0 = 0
+2:20/0 = 0
+3:20/0 = 0
+4:20/0 = 0
+5:20/0 = 0
+6:20/0 = 0
+7:20/0 = 0
+8:20/0 = 0
+9:20/0 = 0
+10:20/0 = 0
+11:20/0 = 0
+0:21/0 = 0
+1:21/0 = 0
+2:21/0 = 0
+3:21/0 = 0
+4:21/0 = 0
+5:21/0 = 0
+6:21/0 = 0
+0:22/0 = 0
+1:22/0 = 0
+3:22/0 = 0
+6:22/0 = 0
+7:22/0 = 0
+0:23/0 = 0
+1:23/0 = 0
+2:23/0 = 0
+3:23/0 = 0
+4:23/0 = 0
+5:23/0 = 0
+6:23/0 = 0
+7:23/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_c4ikj"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_21u1r")
+
+[sub_resource type="Theme" id="Theme_8khhu"]
+default_font = ExtResource("7_tvuoa")
+default_font_size = 0
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_jyrdu")
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAD//wEAAAACAAEAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAEAAAD9/wIAAAAAAAIAAAD+/wAAAAABAAAAAAD+/wEAAAABAAEAAAD+/wIAAAABAAIAAAD//wAAAAACAAAAAAD//wIAAAACAAIAAAAKAAMAAAAGAAMAAAAKAAQAAAAGAAAAAAAKAAUAAAAGAAEAAAAKAAYAAAAGAAIAAAALAAMAAAAHAAMAAAALAAQAAAAHAAAAAAALAAUAAAAHAAEAAAALAAYAAAAHAAIAAAD8/wMAAAAIAAAAAAD8/wQAAAAIAAAAAAD8/wUAAAAIAAEAAAD8/wYAAAAIAAIAAAD9/wMAAAAGAAAAAAD9/wQAAAAGAAAAAAD9/wUAAAAGAAEAAAD9/wYAAAAGAAIAAAD+/wMAAAAHAAAAAAD+/wQAAAAHAAAAAAD+/wUAAAAHAAEAAAD+/wYAAAAHAAIAAAD//wMAAAAIAAAAAAD//wQAAAAIAAAAAAD//wUAAAAIAAEAAAD//wYAAAAIAAIAAAD5////AAAFAAMAAAD5/wAAAAAFAAEAAAD5/wEAAAAFAAIAAAD5/wIAAAAFAAMAAAD6////AAAGAAMAAAD6/wAAAAAGAAEAAAD6/wEAAAAGAAIAAAD6/wIAAAAGAAMAAAD7////AAAHAAMAAAD7/wAAAAAHAAEAAAD7/wEAAAAHAAIAAAD7/wIAAAAHAAMAAAD8////AAAIAAMAAAD8/wAAAAAIAAEAAAD8/wEAAAAIAAIAAAD8/wIAAAAIAAMAAAD5/wMAAAAFAAAAAAD5/wQAAAAFAAAAAAD5/wUAAAAFAAEAAAD5/wYAAAAFAAIAAAD6/wMAAAAGAAAAAAD6/wQAAAAGAAAAAAD6/wUAAAAGAAEAAAD6/wYAAAAGAAIAAAD7/wMAAAAHAAAAAAD7/wQAAAAHAAAAAAD7/wUAAAAHAAEAAAD7/wYAAAAHAAIAAAD9//z/AAAFAAAAAAD9//3/AAAFAAEAAAD9//7/AAAFAAIAAAD9////AAAFAAMAAAD+//z/AAAGAAAAAAD+//3/AAAGAAEAAAD+//7/AAAGAAIAAAD+////AAAGAAMAAAD///z/AAAHAAAAAAD///3/AAAHAAEAAAD///7/AAAHAAIAAAD/////AAAHAAMAAAAAAPz/AAAIAAAAAAAAAP3/AAAIAAEAAAAAAP7/AAAIAAIAAAAAAP//AAAIAAMAAAD5//z/AAAFAAAAAAD5//3/AAAFAAEAAAD5//7/AAAFAAIAAAD6//z/AAAGAAAAAAD6//3/AAAGAAEAAAD6//7/AAAGAAIAAAD7//z/AAAHAAAAAAD7//3/AAAHAAEAAAD7//7/AAAHAAIAAAD8//z/AAAIAAAAAAD8//3/AAAIAAEAAAD8//7/AAAIAAIAAAABAPz/AAAFAAAAAAABAP3/AAAFAAEAAAABAP7/AAAFAAIAAAABAP//AAAFAAMAAAACAPz/AAAGAAAAAAACAP3/AAAGAAEAAAACAP7/AAAGAAIAAAACAP//AAAGAAMAAAADAPz/AAAHAAAAAAADAP3/AAAHAAEAAAADAP7/AAAHAAIAAAADAP//AAAHAAMAAAAEAPz/AAAIAAAAAAAEAP3/AAAIAAEAAAAEAP7/AAAIAAIAAAAEAP//AAAIAAMAAAAFAPz/AAAFAAAAAAAFAP3/AAAFAAEAAAAFAP7/AAAFAAIAAAAFAP//AAAFAAMAAAAGAPz/AAAGAAAAAAAGAP3/AAAGAAEAAAAGAP7/AAAGAAIAAAAGAP//AAAGAAMAAAAHAPz/AAAHAAAAAAAHAP3/AAAHAAEAAAAHAP7/AAAHAAIAAAAHAP//AAAHAAMAAAAIAPz/AAAIAAAAAAAIAP3/AAAIAAEAAAAIAP7/AAAIAAIAAAAIAP//AAAIAAMAAAAJAPz/AAAFAAAAAAAJAP3/AAAFAAEAAAAJAP7/AAAFAAIAAAAJAP//AAAFAAMAAAAKAPz/AAAGAAAAAAAKAP3/AAAGAAEAAAAKAP7/AAAGAAIAAAAKAP//AAAGAAMAAAALAPz/AAAHAAAAAAALAP3/AAAHAAEAAAALAP7/AAAHAAIAAAALAP//AAAHAAMAAAAMAPz/AAAIAAAAAAAMAP3/AAAIAAEAAAAMAP7/AAAIAAIAAAAMAP//AAAIAAMAAAAKAAAAAAAGAAAAAAAKAAEAAAAGAAEAAAAKAAIAAAAGAAIAAAALAAAAAAAHAAAAAAALAAEAAAAHAAEAAAALAAIAAAAHAAIAAAAMAAAAAAAIAAAAAAAMAAEAAAAIAAEAAAAMAAIAAAAIAAIAAAAMAAMAAAAIAAMAAAAKAAcAAAAGAAMAAAALAAcAAAAHAAMAAAAMAAQAAAAIAAAAAAAMAAUAAAAIAAEAAAAMAAYAAAAIAAIAAAAMAAcAAAAIAAMAAAD7/wcAAAAHAAMAAAD8/wcAAAAIAAMAAAD9/wcAAAAGAAMAAAD+/wcAAAAHAAMAAAD//wcAAAAIAAMAAAD5/wcAAAAFAAMAAAD6/wcAAAAGAAMAAAA=")
+tile_set = SubResource("TileSet_c4ikj")
+
+[node name="Units" type="Node2D" parent="."]
+script = ExtResource("3_1fnir")
+
+[node name="EnemyHandler" type="Node2D" parent="Units"]
+script = ExtResource("13_s10t3")
+
+[node name="Shade" parent="Units/EnemyHandler" instance=ExtResource("6_1qanx")]
+
+[node name="PlayerHandler" type="Node2D" parent="Units"]
+script = ExtResource("3_1ty2c")
+
+[node name="Ranger" parent="Units/PlayerHandler" instance=ExtResource("4_qvp3i")]
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="GridDrawing" type="Node2D" parent="GameUI"]
+script = ExtResource("6_5s6n2")
+
+[node name="TurnLabel" type="Label" parent="GameUI"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -98.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme = SubResource("Theme_8khhu")
+text = "Player Turn"
+horizontal_alignment = 1
+
+[node name="LevelUI" type="Node" parent="."]
+
+[node name="Marker" parent="LevelUI" instance=ExtResource("8_pfu7e")]
+unique_name_in_owner = true
+position = Vector2(72, 72)
+
+[node name="CombatHandler" type="Node" parent="."]
+script = ExtResource("9_voa7f")
+
+[node name="Pathing" parent="CombatHandler" instance=ExtResource("10_nkk0r")]
+
+[node name="SelectionHandler" type="Node2D" parent="."]
+script = ExtResource("11_4hyqs")
+
+[node name="MovementHandler" type="Node2D" parent="."]
+script = ExtResource("12_taqrg")
+
+[node name="Pathing" parent="." instance=ExtResource("10_nkk0r")]
+
+[connection signal="move_made" from="Units/PlayerHandler" to="." method="_on_units_move_made"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm2s4wxs5pgqy"]
+
+[ext_resource type="Texture2D" uid="uid://0psjbkiv0owc" path="res://assets/ui/Marker 16x16.png" id="1_d3gkr"]
+[ext_resource type="Script" path="res://scripts/ui/marker.gd" id="2_sbcr5"]
+
+[node name="Marker" type="Sprite2D"]
+modulate = Color(0.03856, 0.964009, 0.882628, 0.388235)
+texture = ExtResource("1_d3gkr")
+script = ExtResource("2_sbcr5")
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [8.0, -8.0]

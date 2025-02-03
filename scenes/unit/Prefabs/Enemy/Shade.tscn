@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://6xsf5h54kf3s"]
+
+[ext_resource type="Script" path="res://scripts/unit/unit.gd" id="1_o2he7"]
+[ext_resource type="PackedScene" uid="uid://c3nkk1d2atvg0" path="res://scenes/unit/Components/unit_sprite.tscn" id="2_w8e5a"]
+[ext_resource type="PackedScene" uid="uid://b2615xel6s45s" path="res://scenes/unit/Components/unit_collision_shape.tscn" id="3_l0dgk"]
+[ext_resource type="Texture2D" uid="uid://ovtyq4e0mi4k" path="res://assets/units/Shade.png" id="3_ubahi"]
+[ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="4_co314"]
+[ext_resource type="PackedScene" uid="uid://dpsoty2c27o2p" path="res://scenes/unit/Components/inventory.tscn" id="5_d6qsd"]
+[ext_resource type="PackedScene" uid="uid://f4n43s7wbyxh" path="res://scenes/equipment/Prefabs/claws.tscn" id="6_lpog2"]
+
+[node name="Shade" type="CharacterBody2D"]
+input_pickable = true
+motion_mode = 1
+script = ExtResource("1_o2he7")
+unit_type = 3
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [-8.0, 8.0]
+
+[node name="UnitSprite" parent="." instance=ExtResource("2_w8e5a")]
+texture = ExtResource("3_ubahi")
+
+[node name="UnitCollisionShape" parent="." instance=ExtResource("3_l0dgk")]
+
+[node name="Stats" parent="." instance=ExtResource("4_co314")]
+
+[node name="Inventory" parent="." instance=ExtResource("5_d6qsd")]
+
+[node name="Weapon" parent="Inventory" instance=ExtResource("6_lpog2")]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
