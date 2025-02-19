@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3nkk1d2atvg0"]
+[gd_scene load_steps=3 format=3 uid="uid://c3nkk1d2atvg0"]
 
 [ext_resource type="Texture2D" uid="uid://bwts408fu28mn" path="res://assets/units/Ranger1.0.png" id="1_v783t"]
 [ext_resource type="PackedScene" uid="uid://3733uyy7l7i" path="res://scenes/unit/sprite_ui/highlighter.tscn" id="2_pbtcx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfhum"]
-bg_color = Color(1, 0, 0, 1)
 
 [node name="UnitSprite" type="Sprite2D"]
 position = Vector2(8, 8)
@@ -18,21 +15,3 @@ visible = false
 position = Vector2(0, 0)
 width = 1.0
 default_color = Color(1, 0.52549, 0.156863, 0.686275)
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
-offset_right = -8.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/fill = SubResource("StyleBoxFlat_dfhum")
-max_value = 5.0
-step = 1.0
-value = 5.0
-show_percentage = false

@@ -18,29 +18,28 @@ func validate_action(action, attacker: Unit, defender: Unit):
 	else:
 		print("already took action")
 		return false
-		
-func get_targetable_tiles(current_tile: Vector2i, weapon_range: int):
-	# Using weapon range
-	var directions = [
-		Vector2i(1, 0), #right
-		Vector2i(0, 1), # Down
-		Vector2i(-1, 0), # Left
-		Vector2i(0,-1) # Up
-	]
-	var tiles = []
-	print("weapon range: ", weapon_range)
-	for direction in directions:
-		for i in range(1, weapon_range+1):
-			tiles.append(current_tile+(direction*i))
-	print("targetable_tiles: ", tiles)
-	return tiles
 
 
 ## Perform the attack skill on the defender using the attacker's stats
 func attack(attacker: Unit, attack: Skill, defender: Unit) -> void:
 	# Calculate attack damage
+	print(attack.damage, "damage!")
+	defender.stats.hp -= attack.damage
+	defender.update_healthbar()
+	check_death(defender)
 	
-	
+
+## Checks if the victim has no remaining health and queue's them for deletion if true
+func check_death(victim: Unit):
+	if victim.stats.hp <= 0:
+		print("Unit died")
+		victim.queue_free()
+		var unit_handler = get_node("../Units")
+		unit_handler.set_units()
+
+
+
+### Everything below might be outdated/deleted
 func weapon_attack(attacker: Unit, defender: Unit):
 	## Perform a basic attack with a weapon
 	# Calculate attack damage
@@ -78,10 +77,22 @@ func defend(defender: Unit, damage: int):
 	defender.stats.update_health_bar()
 	check_death(defender)
 	
-	
-func check_death(victim: Unit):
-	if victim.stats.hp <= 0:
-		print("Unit died")
-		victim.queue_free()
-		var unit_handler = get_node("../Units")
-		unit_handler.set_units()
+
+
+
+## Currently Only used by enemy_handler so TODO: Update to new format
+func get_targetable_tiles(current_tile: Vector2i, weapon_range: int):
+	# Using weapon range
+	var directions = [
+		Vector2i(1, 0), #right
+		Vector2i(0, 1), # Down
+		Vector2i(-1, 0), # Left
+		Vector2i(0,-1) # Up
+	]
+	var tiles = []
+	#print("weapon range: ", weapon_range)
+	for direction in directions:
+		for i in range(1, weapon_range+1):
+			tiles.append(current_tile+(direction*i))
+	#print("targetable_tiles: ", tiles)
+	return tiles

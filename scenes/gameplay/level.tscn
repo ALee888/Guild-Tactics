@@ -9,8 +9,8 @@
 [ext_resource type="Script" path="res://scripts/level/Gameplay/action_handler.gd" id="7_wyqrw"]
 [ext_resource type="PackedScene" uid="uid://cm2s4wxs5pgqy" path="res://scenes/ui/marker.tscn" id="8_pfu7e"]
 [ext_resource type="Script" path="res://scripts/level/Gameplay/selection_handler.gd" id="11_4hyqs"]
-[ext_resource type="PackedScene" uid="uid://dkluhleqjf0co" path="res://scenes/unit/ranger.tscn" id="11_84fnk"]
-[ext_resource type="PackedScene" uid="uid://bc4671beot6md" path="res://scenes/unit/Shade.tscn" id="12_vasab"]
+[ext_resource type="PackedScene" uid="uid://cjbbsi4ox7ra" path="res://scenes/unit/Prefabs/Player/ranger.tscn" id="11_wvpo1"]
+[ext_resource type="PackedScene" uid="uid://du75ibdqvexca" path="res://scenes/unit/Prefabs/Enemy/shade.tscn" id="12_mpill"]
 [ext_resource type="Script" path="res://scripts/level/Gameplay/enemy_handler.gd" id="13_s10t3"]
 [ext_resource type="Script" path="res://scripts/level/camera_2d.gd" id="15_dr3bd"]
 [ext_resource type="Script" path="res://scripts/level/Gameplay/movement_handler.gd" id="16_emskw"]
@@ -322,15 +322,13 @@ script = ExtResource("3_1fnir")
 
 [node name="PlayerUnits" type="Node2D" parent="Units"]
 
-[node name="Ranger" parent="Units/PlayerUnits" instance=ExtResource("11_84fnk")]
-position = Vector2(48, 48)
-unit_type = 1
+[node name="Ranger" parent="Units/PlayerUnits" instance=ExtResource("11_wvpo1")]
+position = Vector2(32, 0)
 
 [node name="EnemyUnits" type="Node2D" parent="Units"]
 
-[node name="Sahde" parent="Units/EnemyUnits" instance=ExtResource("12_vasab")]
-position = Vector2(96, 48)
-unit_type = 3
+[node name="Shade" parent="Units/EnemyUnits" instance=ExtResource("12_mpill")]
+position = Vector2(0, 16)
 
 [node name="SelectionHandler" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -368,5 +366,7 @@ position = Vector2(72, 72)
 [node name="GridDrawing" type="Node2D" parent="."]
 script = ExtResource("6_5s6n2")
 
+[connection signal="unit_selected" from="SelectionHandler" to="GameUI/ActionBar" method="_on_selection_handler_unit_selected"]
 [connection signal="movement_complete" from="MovementHandler" to="ActionHandler" method="_on_movement_handler_movement_complete"]
 [connection signal="action_complete" from="ActionHandler" to="." method="_on_action_handler_action_complete"]
+[connection signal="enemy_turn_over" from="EnemyHandler" to="." method="_on_enemy_handler_enemy_turn_over"]

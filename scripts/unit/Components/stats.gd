@@ -1,7 +1,5 @@
 extends Node
 
-@onready var health_bar: ProgressBar = get_node("../UnitSprite/HealthBar")
-
 # TODO: Convert to dictionary if better
 @export var unit_name: String
 @export var max_hp: int = 3
@@ -25,15 +23,6 @@ func generate_random_stats():
 	power = randi_range(1, 5)
 	cunning = randi_range(1, 5)
 	agility = randi_range(1, 5)
-	
-	if health_bar:
-		update_health_bar()
-	
-func update_health_bar():
-	## Update healthbar values to match hp variables
-	health_bar.max_value = max_hp
-	health_bar.value = hp
-
 
 
 func display() -> void:

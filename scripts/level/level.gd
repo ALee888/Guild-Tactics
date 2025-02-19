@@ -53,16 +53,12 @@ func _on_action_handler_action_complete() -> void:
 	if unit_handler.check_player_finished():
 		print("Player finished")
 		# Player has no more moves, start enemy turn
+		Game.set_game_state(Game.game_states.ENEMY_TURN)
 		start_enemy_turn()
 	else:
 		print("Player can make more moves")
 		# Player can make more moves, set state back to player so more moves can be made
 		Game.set_game_state(Game.game_states.PLAYER_TURN)
-
-
-func _on_enemy_turn_over() -> void:
-	print("enemy finished")
-	start_player_turn()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -75,7 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					selection_handler.select()
 				Game.game_states.TARGETING:
 					# TODO: Targeting
-					if action_handler.target():
+					if action_handler.target(%ActionBar.selected_action):
 						%ActionBar.confirm_button.visible = true
 
 	elif event.is_action_pressed("Action"):
@@ -111,3 +107,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			# TODO
 			# 1. Match hotbar key (1 in this case) with ability in ui]
 			# 2. Select action and start targetting
+
+
+func _on_enemy_handler_enemy_turn_over() -> void:
+	print("enemy finished")
+	start_player_turn()

@@ -1,31 +1,60 @@
-[gd_scene load_steps=8 format=3 uid="uid://6xsf5h54kf3s"]
+[gd_scene load_steps=11 format=3 uid="uid://du75ibdqvexca"]
 
-[ext_resource type="Script" path="res://scripts/unit/unit.gd" id="1_o2he7"]
-[ext_resource type="PackedScene" uid="uid://c3nkk1d2atvg0" path="res://scenes/unit/Components/unit_sprite.tscn" id="2_w8e5a"]
-[ext_resource type="PackedScene" uid="uid://b2615xel6s45s" path="res://scenes/unit/Components/unit_collision_shape.tscn" id="3_l0dgk"]
-[ext_resource type="Texture2D" uid="uid://ovtyq4e0mi4k" path="res://assets/units/Shade.png" id="3_ubahi"]
-[ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="4_co314"]
-[ext_resource type="PackedScene" uid="uid://dpsoty2c27o2p" path="res://scenes/unit/Components/inventory.tscn" id="5_d6qsd"]
-[ext_resource type="PackedScene" uid="uid://f4n43s7wbyxh" path="res://scenes/equipment/Prefabs/claws.tscn" id="6_lpog2"]
+[ext_resource type="Script" path="res://scripts/unit/enemy.gd" id="1_vwtlr"]
+[ext_resource type="PackedScene" uid="uid://c3nkk1d2atvg0" path="res://scenes/unit/Components/unit_sprite.tscn" id="2_rttxr"]
+[ext_resource type="Texture2D" uid="uid://ovtyq4e0mi4k" path="res://assets/units/Shade.png" id="3_qun3j"]
+[ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="4_a7y8b"]
+[ext_resource type="PackedScene" uid="uid://dpsoty2c27o2p" path="res://scenes/unit/Components/inventory.tscn" id="5_2c0v3"]
+[ext_resource type="PackedScene" uid="uid://f4n43s7wbyxh" path="res://scenes/equipment/Prefabs/claws.tscn" id="6_a3dbw"]
+[ext_resource type="Script" path="res://scripts/unit/Components/skills.gd" id="7_leu7p"]
+[ext_resource type="Script" path="res://scripts/unit/Skills/weapon_attack.gd" id="8_iebh4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am2qc"]
+size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyoqa"]
+bg_color = Color(1, 0, 0, 1)
 
 [node name="Shade" type="CharacterBody2D"]
 input_pickable = true
 motion_mode = 1
-script = ExtResource("1_o2he7")
+script = ExtResource("1_vwtlr")
 unit_type = 3
 metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
 metadata/_edit_vertical_guides_ = [-8.0, 8.0]
 
-[node name="UnitSprite" parent="." instance=ExtResource("2_w8e5a")]
-texture = ExtResource("3_ubahi")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_am2qc")
 
-[node name="UnitCollisionShape" parent="." instance=ExtResource("3_l0dgk")]
+[node name="UnitSprite" parent="." instance=ExtResource("2_rttxr")]
+texture = ExtResource("3_qun3j")
 
-[node name="Stats" parent="." instance=ExtResource("4_co314")]
+[node name="Stats" parent="." instance=ExtResource("4_a7y8b")]
 
-[node name="Inventory" parent="." instance=ExtResource("5_d6qsd")]
+[node name="Inventory" parent="." node_paths=PackedStringArray("equipted_weapon") instance=ExtResource("5_2c0v3")]
+equipted_weapon = NodePath("Claws")
 
-[node name="Weapon" parent="Inventory" instance=ExtResource("6_lpog2")]
+[node name="Claws" parent="Inventory" instance=ExtResource("6_a3dbw")]
+damage = 2
+
+[node name="Skills" type="Node" parent="."]
+script = ExtResource("7_leu7p")
+
+[node name="WeaponAttack" type="Node" parent="Skills"]
+script = ExtResource("8_iebh4")
+target = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 20.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_hyoqa")
+max_value = 5.0
+step = 1.0
+value = 5.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

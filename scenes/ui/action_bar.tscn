@@ -74,3 +74,4 @@ text = "4"
 
 [connection signal="pressed" from="Panel/VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/BasicActions/WeaponAttack" to="." method="_on_weapon_attack_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BasicActions/PassButton" to="." method="_on_pass_button_pressed"]

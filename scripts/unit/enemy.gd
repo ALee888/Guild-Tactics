@@ -1,2 +1,6 @@
 extends Unit
-@onready var combat_handler: Node = %CombatHandler
+
+class_name Enemy
+
+enum enemy_tactics {MINDLESS, INTELLIGENT}
+@export var tactics: enemy_tactics

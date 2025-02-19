@@ -5,7 +5,7 @@ extends Node2D
 @onready var selection_handler: Node2D = $"../SelectionHandler"
 @onready var movement_handler: Node2D = %MovementHandler
 
-var selected_action: Skill
+#var selected_action: Skill
 var target_unit: Unit
 
 signal action_complete
@@ -43,7 +43,7 @@ func action_click():
 
 
 ## When user selects (L-click) an enemy to target, return true or false if it is a valid enemy
-func target() -> bool:
+func target(selected_action: Skill) -> bool:
 	if !selected_action:
 		print("No action selected in target()")
 		return false
@@ -67,7 +67,7 @@ func target() -> bool:
 
 
 ## Execute a combat or unit action
-func action() -> void:
+func action(selected_action: Skill) -> void:
 	# 3 parts to an aciton:
 	# 1. Selected unit
 	var selected_unit = selection_handler.selected_unit
@@ -76,6 +76,9 @@ func action() -> void:
 	if selected_action is Skill:
 		# TODO: Check type. (Attack, buff, debuf, etc)
 		Combat.attack(selected_unit, selected_action, target_unit)
+		selected_unit.took_action = true
+		selected_unit.moved = true # for now set true to show unit is done
+		action_complete.emit()
 
 
 func unit_hotbar(button_num: int):
@@ -87,6 +90,12 @@ func unit_hotbar(button_num: int):
 				## Draw range indicator
 				#unit.unit_ui.build_combat_range(unit.combat.weapon, unit.current_tile)
 				## TODO: ready weapon animation 
+
+func pass_unit() -> void:
+	var unit = selection_handler.selected_unit
+	unit.took_action = true
+	unit.moved = true
+	action_complete.emit()
 
 func _on_movement_handler_movement_complete() -> void:
 	action_complete.emit()

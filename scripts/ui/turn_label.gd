@@ -8,6 +8,8 @@ func _process(delta: float) -> void:
 			text = "Resolving"
 		Game.game_states.TARGETING:
 			text = "Targeting..."
+		Game.game_states.ENEMY_TURN:
+			text = "Enemy Turn"
 
 func change_label(new_text: String):
 	text = new_text

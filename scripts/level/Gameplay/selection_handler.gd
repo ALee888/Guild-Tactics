@@ -18,6 +18,7 @@ func select() -> void:
 			# Deselect all units
 			deselect()
 			
+			unit_selected.emit(unit)
 			# Update UI
 			if !unit.moved:
 				%Overlay.build_range(unit.stats.agility, unit.current_tile)

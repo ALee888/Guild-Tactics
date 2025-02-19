@@ -4,6 +4,7 @@ class_name Unit
 
 # References
 @onready var highlighter: Line2D = get_node("UnitSprite/Highlighter")
+@onready var health_bar: ProgressBar = $HealthBar
 @onready var stats: Node = $Stats
 @onready var inventory: Node = $Inventory
 @onready var skills: Node = $Skills
@@ -25,6 +26,13 @@ var took_action = false
 func deselect():
 	highlighter.visible = false
 	selected = false
+
+
+
+func update_healthbar():
+	## Update healthbar values to match hp variables
+	health_bar.max_value = stats.max_hp
+	health_bar.value = stats.hp
 
 ## When the mouse exits the unit, remove the highlight unless the unit is highlighted
 func _on_mouse_exited() -> void:

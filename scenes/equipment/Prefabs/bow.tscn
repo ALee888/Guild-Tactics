@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/items/equipment/weapon.gd" id="1_scmbv"]
 
-[node name="Weapon" type="Node"]
+[node name="Bow" type="Node"]
 script = ExtResource("1_scmbv")
 damage = 1
 range = 5

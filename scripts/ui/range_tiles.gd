@@ -36,7 +36,7 @@ func build_range(range, current_tile) -> void:
 
 
 ## Function to place tiles indicating a unit's target range.
-func build_combat_range(weapon: Equipment, current_tile: Vector2i) -> void:
+func build_combat_range(range: int, current_tile: Vector2i) -> void:
 	# NOTE: Starting with horizontal and vertical range
 	var directions = [
 		Vector2i(1, 0), #right
@@ -44,10 +44,11 @@ func build_combat_range(weapon: Equipment, current_tile: Vector2i) -> void:
 		Vector2i(-1, 0), # Left
 		Vector2i(0,-1) # Up
 	]
+	
 	for direction in directions:
 		var tile_ptr = Vector2i()
 		# Place a tile in as many places as the weapon range
-		for i in range(weapon.range):
+		for i in range(range):
 			tile_ptr+=direction
 			set_cell(current_tile+tile_ptr, 1, Vector2i(0, 0))
 

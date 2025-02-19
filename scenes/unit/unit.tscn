@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7g434s2s5262"]
+[gd_scene load_steps=9 format=3 uid="uid://7g434s2s5262"]
 
 [ext_resource type="Script" path="res://scripts/unit/unit.gd" id="1_pxgrc"]
 [ext_resource type="PackedScene" uid="uid://c3nkk1d2atvg0" path="res://scenes/unit/Components/unit_sprite.tscn" id="2_6poqb"]
@@ -6,7 +6,12 @@
 [ext_resource type="Script" path="res://scripts/unit/Skills/weapon_attack.gd" id="7_3jnlu"]
 [ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="7_hthv4"]
 [ext_resource type="PackedScene" uid="uid://dpsoty2c27o2p" path="res://scenes/unit/Components/inventory.tscn" id="7_qa1yh"]
-[ext_resource type="PackedScene" uid="uid://b2615xel6s45s" path="res://scenes/unit/Components/unit_collision_shape.tscn" id="8_o247n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am2qc"]
+size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyoqa"]
+bg_color = Color(1, 0, 0, 1)
 
 [node name="Rename Me" type="CharacterBody2D"]
 input_pickable = true
@@ -15,9 +20,11 @@ script = ExtResource("1_pxgrc")
 metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
 metadata/_edit_vertical_guides_ = [-8.0, 8.0]
 
-[node name="UnitSprite" parent="." instance=ExtResource("2_6poqb")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_am2qc")
 
-[node name="UnitCollisionShape" parent="." instance=ExtResource("8_o247n")]
+[node name="UnitSprite" parent="." instance=ExtResource("2_6poqb")]
 
 [node name="Stats" parent="." instance=ExtResource("7_hthv4")]
 
@@ -29,6 +36,17 @@ script = ExtResource("6_f6nyl")
 [node name="WeaponAttack" type="Node" parent="Skills"]
 script = ExtResource("7_3jnlu")
 target = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 20.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_hyoqa")
+max_value = 5.0
+step = 1.0
+value = 5.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

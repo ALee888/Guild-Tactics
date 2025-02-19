@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://6omq510q4nms"]
+
+[ext_resource type="Script" path="res://scripts/unit/enemy.gd" id="1_ekrex"]
+[ext_resource type="PackedScene" uid="uid://c3nkk1d2atvg0" path="res://scenes/unit/Components/unit_sprite.tscn" id="2_q08dp"]
+[ext_resource type="PackedScene" uid="uid://2r4vdygi7knt" path="res://scenes/unit/Components/stats.tscn" id="3_gfk8w"]
+[ext_resource type="Texture2D" uid="uid://ovtyq4e0mi4k" path="res://assets/units/Shade.png" id="3_vtvf6"]
+[ext_resource type="PackedScene" uid="uid://dpsoty2c27o2p" path="res://scenes/unit/Components/inventory.tscn" id="4_a4g2g"]
+[ext_resource type="PackedScene" uid="uid://f4n43s7wbyxh" path="res://scenes/equipment/Prefabs/claws.tscn" id="5_ppqyj"]
+[ext_resource type="Script" path="res://scripts/unit/Components/skills.gd" id="5_th1x0"]
+[ext_resource type="Script" path="res://scripts/unit/Skills/weapon_attack.gd" id="6_a3qb7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am2qc"]
+size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyoqa"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Enemy" type="CharacterBody2D"]
+input_pickable = true
+motion_mode = 1
+script = ExtResource("1_ekrex")
+unit_type = 3
+metadata/_edit_horizontal_guides_ = [-8.0, 8.0]
+metadata/_edit_vertical_guides_ = [-8.0, 8.0]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_am2qc")
+
+[node name="UnitSprite" parent="." instance=ExtResource("2_q08dp")]
+texture = ExtResource("3_vtvf6")
+
+[node name="Stats" parent="." instance=ExtResource("3_gfk8w")]
+
+[node name="Inventory" parent="." instance=ExtResource("4_a4g2g")]
+
+[node name="Claws" parent="Inventory" instance=ExtResource("5_ppqyj")]
+
+[node name="Skills" type="Node" parent="."]
+script = ExtResource("5_th1x0")
+
+[node name="WeaponAttack" type="Node" parent="Skills"]
+script = ExtResource("6_a3qb7")
+target = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 20.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_hyoqa")
+max_value = 5.0
+step = 1.0
+value = 5.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
